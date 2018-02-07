@@ -1,0 +1,316 @@
+main {
+    padding-top: 30px;
+}
+
+/* Show More Input */
+
+.showmore {
+    display: inline;
+}
+
+.view-section {
+    margin-top:200px;
+}
+.home-view-intro{
+    margin-top:300px;
+    text-align: center;
+}
+.button-group-center {
+    margin: 0 auto; 
+    margin-top:50px;
+    text-align: center;
+    width: inherit;
+    display: inline-block;
+}
+.button-group-center .btn{
+    font-size:20px;
+}
+
+.title{
+    font-size: 70px;
+    color: white;
+    line-height: 100px;
+    font-weight: 800;
+}
+
+.home-view{
+
+    background-image: url('assets/img/background.jpg');
+    background-color:green;
+    display: inline-block;
+    position:absolute;
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+    width:100vw;
+    height:100%;
+    top:0px;
+    left: 0px;
+}
+/*=======================================
+START : TREEVIEW COMPONENTS ;
+========================================*/
+.treeview_section{
+    padding:20px;
+    margin:0px;
+    margin-top:10px;
+}
+.treeview{
+    background-color: aliceblue;
+    padding-top:10px;
+    padding-bottom:10px;
+    /*background-image: url('../img/treeview.png');*/
+    background-size:100% 100%;
+    height: 80vh;
+    color:white;
+    border:1px solid black;
+    overflow:auto;
+}
+.detail_section{
+    background-color: #efedee;
+    /*background-image: url('../img/detailback.png');*/
+    background-size:100% 100%;
+    height: 80vh;
+    overflow: auto;
+    border:1px solid black;
+}
+
+.detail_title, .splash_title , .banner_title{
+    font-size: 25px;
+    color:darkblue;
+}
+
+.detail_upload_btn, .splash_upload_btn , .banner_upload_btn{
+    float: right;
+}
+
+.detail_images{
+
+}
+.url-label{
+    margin-left: 30px;
+}
+.url-inputbox{
+    width:300px!important;
+}
+
+.op_title{
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0!important;
+      right: 0!important;
+      
+    }
+
+
+/* =====================================
+START: LOADING ICON FOR LOGGING OUT USER 
+===================================== */
+
+.dizzy-gillespie {
+    filter: saturate(3);
+    width: 0.1px;
+    height: 0.1px;
+    border: 40px solid transparent;
+    border-radius: 5px;
+    animation: loader 3s ease-in infinite, spin 1s linear infinite;
+    margin: auto;
+}
+
+.dizzy-gillespie::before {
+    filter: saturate(0.3);
+    display: block;
+    position: absolute;
+    z-index: -1;
+    margin-left: -40px;
+    margin-top: -40px;
+    content: '';
+    height: 0.1;
+    width: 0.1;
+    border: 40px solid transparent;
+    border-radius: 5px;
+    animation: loader 2s ease-in infinite reverse, spin 0.8s linear infinite reverse;
+}
+
+.dizzy-gillespie::after {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    margin-left: -10px;
+    margin-top: -10px;
+    content: '';
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background-color: white;
+}
+.content_section{
+    margin-top:40px;
+}
+.tree_view{
+    height: 700px;
+    overflow-y: auto;
+    background-color: #f1e3cf;
+    border:2px solid black;
+}
+
+.des_view{
+    height: 700px;
+    overflow-y: auto;
+    background-color: #cccccc;
+    border:2px solid black;
+}
+
+@keyframes loader {
+    0% {
+        border-bottom-color: transparent;
+        border-top-color: #114357
+    }
+    25% {
+        border-left-color: transparent;
+        border-right-color: #826C75
+    }
+    50% {
+        border-top-color: transparent;
+        border-bottom-color: #F29492
+    }
+    75% {
+        border-right-color: transparent;
+        border-left-color: #826C75
+    }
+    100% {
+        border-bottom-color: transparent;
+        border-top-color: #114357
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(-360deg)
+    }
+}
+
+
+/* ===================================
+END: LOADING ICON FOR LOGGING OUT USER 
+=================================== */
+
+
+/* HEADER 
+===================== */
+
+header .navbar {
+    border-radius: 0;
+}
+
+.reset {
+    float: right;
+}
+
+
+/* NGANIMATE
+====================== */
+
+
+/* show and hide */
+
+.show-hide-message.ng-hide-remove {
+    -webkit-animation: zoomIn 0.3s both ease;
+    -moz-animation: zoomIn 0.3s both ease;
+    animation: zoomIn 0.3s both ease;
+}
+
+
+/* ANIMATIONS
+====================== */
+
+.spinner {
+    -webkit-animation: spin 1s infinite;
+    -moz-animation: spin 1s infinite;
+    animation: spin 1s infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+
+/*===========================================
+        Modal css for image view
+===========================================*/
+#myModal .modal-dialog , #sampleModal .modal-dialog{
+    margin-top:50px;
+    width:auto!important;
+    text-align: center;
+}
+#myModal .modal-content ,#sampleModal .modal-content{
+    display: inline-block;
+    margin:0 auto;
+}
+#myModal .modal-body ,#sampleModal.modal-body{
+    position: relative;
+    overflow-y: auto;
+    width:100%;
+    max-height: 800px;
+    max-width: 800px;
+    padding: 15px;
+}
+
+#stripModal{
+    margin-top:100px;
+}
+
+
+/*=======================================
+    Font
+=======================================*/
+#logo{
+        position: absolute;
+        top:40px;
+        left:750px;
+        font-size: 70px;
+        font-family: 'Lobster', helvetica, arial;
+        text-shadow: 0 1px 0 #ccc,
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);
+    }
+
+     
+
+
+

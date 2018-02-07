@@ -1,0 +1,261 @@
+<img src="assets/img/Logo.png" style="margin-top:25px;margin-left:100px;">
+<span align="center" id="logo" class="op_title">
+	<i>O & P Admin</i>
+</span>
+<a style="float:right;margin-top:20px;margin-right:20px" ng-click="tree.logout()">Log out</a>
+<!-- 
+    <span ><b>Selected Node</b> :<strong ng-bind="currentCodeName=mytree.currentNode.roleName"></strong></span> -->
+<!-- <img ng-src="assets/img/header.png" style="margin-top:5px;"> -->
+
+<div class="row treeview_section">
+	<div class="row">
+		<a href="/admin" style="float:right;margin-right:30px;">goto Admin</a>
+	</div>
+	<div class="col-md-4 treeview">
+		<br>
+		<div 
+			data-angular-treeview="true" 
+			data-tree-id="mytree" 
+			data-tree-model="tree.roleList" 
+			data-node-id="roleId" 
+			data-node-label="roleName"
+			data-node-count="count" 
+			data-node-children="children">
+		</div>
+
+	</div>
+	<div class="col-md-8 detail_section">
+		<h2>CODE:
+			<strong ng-bind="currentCodeName=mytree.currentNode.roleName" ng-show="tree.isCode"></strong>
+		</h2>
+		<h2>DESCRIPTION</h2>
+		<h4>{{tree.description}}</h4>
+		<br>
+		<div class="detail_images">
+			<span class="detail_title">DETAIL IMAGES</span>&nbsp;&nbsp;&nbsp;
+			<span>The width should be same with height</span>&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-xs btn-success " ng-click="tree.viewSample(0)">View sample</button>
+			<br>
+			<form class="form-inline" name="tree.upload_form">
+				<input class="btn input-group" type="file" ngf-select ng-model="tree.detailFile" name="file" ngf-pattern="'image/*'" accept="image/*"
+				 ngf-max-size="20MB" required />
+				<label class="label label-default url-label"> Site URL:</label>
+				<input type="text" class="input-group form-control url-inputbox" ng-model="tree.currentDetailSiteUrl" required>
+				<button ng-disabled="!tree.isCode || !tree.currentDetailSiteUrl" class="browse btn btn-primary input-md detail_upload_btn"
+				 type="submit" ng-click="tree.submit_detail(0)"> Upload</button>
+				<!-- Image thumbnail: <img style="width:100px;" ngf-thumbnail="tree.file"/> -->
+			</form>
+			<!--         <img ng-src="uploads/file-1488257538550.PNG"> -->
+			<br>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>IMAGE URL</th>
+						<th>SITE URL</th>
+						<th align="center" style="text-align:center!important">Activation</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tree.currentDetails">
+						<td>{{$index+1}}</td>
+						<td>{{item.imageUrl}}</td>
+						<td>
+							<a href={{item.siteUrl}}>{{item.siteUrl}}</a>
+						</td>
+						<td align="center">
+							<span ng-show="!item.active" style="color:red">Not available</span>
+							<span ng-show="item.active" style="color:blue">Available</span>
+						</td>
+						<td align="center">
+							<button ng-click="tree.showModal(item.imageUrl)" class="btn btn-success btn-xs">SHOW</button>
+					</tr>
+				</tbody>
+			</table>
+			<span class="splash_title">SPLASH IMAGES</span>&nbsp;&nbsp;&nbsp;
+			<span>The width should be same with height</span>&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-xs btn-success" ng-click="tree.viewSample(1)">View sample</button>
+			<br>
+			<form class="form-inline" name="tree.upload_form">
+				<input class="btn input-group" type="file" ngf-select ng-model="tree.splashFile" name="file" ngf-pattern="'image/*'" accept="image/*"
+				 ngf-max-size="20MB" required />
+				<label class="label label-default url-label"> Site URL:</label>
+				<input type="text" class="input-group form-control url-inputbox" ng-model="tree.currentSplashSiteUrl" required>
+				<button ng-disabled="!tree.isCode || !tree.currentSplashSiteUrl" class="browse btn btn-primary input-md detail_upload_btn"
+				 type="submit" ng-click="tree.submit_detail(1)"> Upload</button>
+				<!-- Image thumbnail: <img style="width:100px;" ngf-thumbnail="tree.file"/> -->
+			</form>
+			<br>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>IMAGE URL</th>
+						<th>SITE URL</th>
+						<th align="center" style="text-align:center!important">Activation</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tree.currentSplashs">
+						<td>{{$index+1}}</td>
+						<td>{{item.imageUrl}}</td>
+						<td>
+							<a>{{item.siteUrl}}</a>
+						</td>
+						<td align="center">
+							<span ng-show="!item.active" style="color:red">Not available</span>
+							<span ng-show="item.active" style="color:blue">Available</span>
+						</td>
+						<td align="center">
+							<button ng-click="tree.showModal(item.imageUrl)" class="btn btn-success btn-xs">SHOW</button>
+					</tr>
+				</tbody>
+			</table>
+			<span class="banner_title">BANNER IMAGES</span>&nbsp;&nbsp;&nbsp;
+			<span>The width should be about 7 times of height</span>&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-xs btn-success" ng-click="tree.viewSample(2)">View sample</button>
+			<br>
+			<form class="form-inline" name="tree.upload_form">
+				<input class="btn input-group" type="file" ngf-select ng-model="tree.bannerFile" name="file" ngf-pattern="'image/*'" accept="image/*"
+				 ngf-max-size="20MB" required />
+				<label class="label label-default url-label"> Site URL:</label>
+				<input type="text" class="input-group form-control url-inputbox" ng-model="tree.currentBannerSiteUrl" required>
+				<button ng-disabled="!tree.isCode || !tree.currentBannerSiteUrl" class="browse btn btn-primary input-md detail_upload_btn"
+				 type="submit" ng-click="tree.submit_detail(2)"> Upload</button>
+				<!-- Image thumbnail: <img style="width:100px;" ngf-thumbnail="tree.file"/> -->
+			</form>
+			<br>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>IMAGE URL</th>
+						<th>SITE URL</th>
+						<th align="center" style="text-align:center!important">Activation</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tree.currentBanners">
+						<td>{{$index+1}}</td>
+						<td>{{item.imageUrl}}</td>
+						<td>
+							<a href={{item.siteUrl}}>{{item.siteUrl}}</a>
+						</td>
+						<td align="center">
+							<span ng-show="!item.active" style="color:red">Not available</span>
+							<span ng-show="item.active" style="color:blue">Available</span>
+						</td>
+						<td align="center">
+							<button ng-click="tree.showModal(item.imageUrl)" class="btn btn-success btn-xs">SHOW</button>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!-- BootstrapJS Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<img ng-src={{tree.currentPhotoUrl}}>
+			</div>
+			<div class="modal-footer">
+				<!-- Modal 'Yes' & 'No' Buttons -->
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="modal fade" id="sampleModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<img ng-src={{tree.sampleUrl}}>
+			</div>
+			<div class="modal-footer">
+				<!-- Modal 'Yes' & 'No' Buttons -->
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="modal fade" id="stripeModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<!-- Modal Body -->
+			<div class="modal-body">
+				<div class='row'>
+					<div class='col-xs-12'>
+						<div class='form-row'>
+							<div class='col-xs-12 form-group required'>
+								<label class='control-label'>Email</label>
+								<input ng-model="tree.stripe.email" class='form-control' size='4' type='text'>
+							</div>
+						</div>
+						<div class='form-row'>
+							<div class='col-xs-12 form-group card required'>
+								<label class='control-label'>Card Number</label>
+								<input ng-model="tree.stripe.number" autocomplete='off' class='form-control card-number' size='20' type='text'>
+							</div>
+						</div>
+						<div class='form-row'>
+							<div class='col-xs-4 form-group cvc required'>
+								<label class='control-label'>CVC</label>
+								<input ng-model="tree.stripe.cvc" autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+							</div>
+							<div class='col-xs-4 form-group expiration required'>
+								<label class='control-label'>Expiration</label>
+								<input ng-model="tree.stripe.month" class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+							</div>
+							<div class='col-xs-4 form-group expiration required'>
+								<label class='control-label'> </label>
+								<input ng-model="tree.stripe.year" class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+							</div>
+						</div>
+						<div class='form-row'>
+							<div class='col-md-12'>
+								<!-- <div class='form-control total'> -->
+								<!-- <span class='amount'>{{tree.amount}}</span> -->
+								<h5 align="center">
+									<b>Amount:</b>$100</h5>
+								<!-- </div> -->
+							</div>
+						</div>
+						<div class='form-row'>
+							<div class='col-md-12 form-group'>
+								<button class='form-control btn btn-primary submit-button' ng-click="tree.pay()">Pay »</button>
+							</div>
+						</div>
+						<div class='form-row'>
+							<div class='col-md-12 error form-group hide'>
+								<div class='alert-danger alert'>
+									Please correct the errors and try again.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<!-- Modal 'Yes' & 'No' Buttons -->
+				<img ng-show="tree.loading" width="50" height="50" src="assets/img/loading.gif">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script>
+
+</script>

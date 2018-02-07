@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <!-- Cascade Style Sheets -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/json-tree.css">
+    <!-- Main Angular Files -->
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/angular-route.js"></script>
+    <script src="assets/js/angular-animate.js"></script>
+    <script src="assets/js/ng-file-upload.min.js"></script>
+    <script src="assets/js/ng-file-upload-shim.min.js"></script>
+    <!-- Angular Controllers -->
+    <script src="app/controllers/mainCtrl.js"></script>
+    <script src="app/controllers/userCtrl.js"></script>
+    <script src="app/controllers/adminCtrl.js"></script>
+    <!-- Angular Config/Routes/TreeView -->
+    <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+    <script src="app/json-tree.js"></script>
+
+
+    <!-- Angular Services-->
+    <script src="app/services/treeServices.js"></script>
+    <script src="app/services/userServices.js"></script>
+    <script src="app/services/authServices.js"></script>
+    <script src="app/services/adminServices.js"></script>
+    <title>OP</title>
+
+</head>
+
+<body ng-app="userApp" ng-cloak>
+    <div ng-view class="op_view"></div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+</body>
+
+</html>

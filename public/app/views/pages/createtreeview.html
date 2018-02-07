@@ -1,0 +1,46 @@
+<div class="container" style="margin-top:100px;">
+
+<form ng-submit="createTree.insertData(roleData);">
+	<label>Role Name:</label>
+	<input type="text" ng-model="createTree.roleData.roleName" required>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<div class="btn-group">
+	    <button type="button" class="btn btn-danger">RoleLevel:</button>
+	    <button type="button" class="btn btn-danger" >{{createTree.currentRoleLevel}}</button>
+	    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    	<span class="caret"></span>
+	    	<span class="sr-only">Toggle Dropdown</span>
+	    </button>
+	    <ul class="dropdown-menu">
+	    	<li><a ng-click="createTree.setroleLevel(false);" href="#">Parent</a></li>
+	    	<li><a ng-click="createTree.setroleLevel(true);" href="#">Code</a></li>
+	    </ul>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label ng-show="createTree.roleLevel">Description</label>
+    <input ng-show="createTree.roleLevel" type="text" ng-model="createTree.roleData.description">
+	<label>Parent Name:</label>
+	<input type="text" ng-bind="parentName=mycreatetree.currentNode.roleName" ng-value="mycreatetree.currentNode.roleName">
+	<button type="submit" class="btn btn-success">Insert</button>
+	<a ng-click="createTree.deleteData()" class="btn btn-danger">Delete</a>
+</form>
+
+<button ng-click="createTree.save();" class="btn btn-danger" style="float:right">Save</button>
+<div class="content_section row">
+	<div class="tree_view col-md-6 col-sm-12">
+<!-- 	    <span><b>Selected Node</b> : {{mycreatetree.currentNode.roleName}}</span> -->
+	<br>
+	    <div
+	      data-angular-treeview="true"
+	      data-tree-id="mycreatetree"
+	      data-tree-model="createTree.roleList"
+	      data-node-id="roleId"
+		  data-node-label="roleName"
+		  data-node-count="count"		  
+	      data-node-children="children">
+	    </div>
+	</div>
+	<div class="col-md-6 col-sm-12 des_view">
+		<h2>{{createTree.currentDescription}}</h2>
+	</div>
+</div>
+</div>

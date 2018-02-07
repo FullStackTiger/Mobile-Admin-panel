@@ -1,0 +1,46 @@
+-api/codes || method = 'get'
+{
+	success:true,
+	codes:[{
+		codeName : String,
+		listName : String,
+		codeDescription : String,
+		detailImg : String
+	}]
+}
+
+-api/code  || method = 'post'
+{
+	codeName : String
+}
+-response
+{
+	success : true,
+	code : {
+		codeName : String,
+		listName : string,
+		codeDescription : String,
+		details : [{
+			siteUrl : String,
+			imageUrl : String
+		}],
+		splashs : [{
+			siteUrl : String,
+			imageUrl : String
+		}],
+		banners : [{
+			siteUrl : String,
+			imageUrl : String
+		}]
+	}
+}
+
+-api/treedata || method = 'get'
+{
+	success : true,
+	data : [{
+		roleName : String,
+		roleType : 'Parent/Code',
+		children : []
+	}]
+}

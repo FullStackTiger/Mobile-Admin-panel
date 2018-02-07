@@ -1,0 +1,268 @@
+<img src="assets/img/Logo.png" style="margin-top:25px;margin-left:100px;">
+<span align="center" id="logo" class="op_title"><i>O & P Admin</i></span>
+<a style="float:right;margin-top:20px;margin-right:20px" ng-click="admin.logout()">Log out</a>
+<!-- 
+    <span ><b>Selected Node</b> :<strong ng-bind="currentCodeName=myadmin.currentNode.roleName"></strong></span> -->
+<!-- <img ng-src="assets/img/header.png" style="margin-top:5px;"> -->
+
+<div class="row treeview_section" >
+<div class="row"><a href="/treeview" style="float:right;margin-right:30px;margin-top:15px;">goto TreeView</a>
+<button class="btn btn-success" ng-click="admin.getCategory()" style="float:right;margin-right:10px;margin-bottom:10px;" data-toggle="modal" data-target="#treeModal" >Add code / Del Directory</button>
+<button class="btn btn-success" style="float:right;margin-right:10px;margin-bottom:10px;" data-toggle="modal" data-target="#userModal">Show users</button>
+</div>
+<div class="col-md-4 treeview">
+<br>
+    <div 
+      data-angular-treeview="true"
+      data-tree-id="mytree"
+      data-tree-model="admin.roleList"
+      data-node-id="roleId"
+	  data-node-label="roleName"
+	  data-node-count="count"
+      data-node-children="children">
+    </div>
+</div>
+<div class="col-md-8 detail_section">
+	<!-- <button class="btn btn-success" style="float:right;margin-right:10px;margin-top:20px;" ng-show="admin.isCode">Delete code</button> -->
+	<h2>CODE: <input type="text" ng-change="editCodeName()" ng-model="editedCode" ng-show="codeEdit"><strong ng-bind="currentCodeName=mytree.currentNode.roleName" ng-show="admin.isCode && !codeEdit"></strong>&nbsp;<button ng-show="admin.isCode" ng-click="admin.editCodeClick()"> <img src="assets/img/edit.png" width="25" height="25" style="margin-bottom:5px;" ng-if="!codeEdit"><img src="assets/img/check.png" width="25" height="25" style="margin-bottom:5px;" ng-if="codeEdit"></button></h2>
+	<h2>DESCRIPTION&nbsp;<button ng-show="admin.isCode" ng-click="admin.editDesClick()"> <img src="assets/img/edit.png" width="25" height="25" style="margin-bottom:5px;" ng-if="!desEdit"><img src="assets/img/check.png" width="25" height="25" style="margin-bottom:5px;" ng-if="desEdit"></button></h2>
+	<h4 ng-if="!desEdit">{{admin.description}}</h4>
+	<textarea ng-model="admin.description" ng-if="desEdit" cols="100" rows="3"></textarea>
+	<br>
+	<div class="detail_images">
+		<span class="detail_title">DETAIL IMAGES</span>&nbsp;&nbsp;&nbsp;<span>The width should be same with height</span>&nbsp;&nbsp;&nbsp;<button class="btn btn-xs btn-success " ng-click="admin.viewSample(0)">View sample</button>
+		<br>
+		<form  class="form-inline" name="admin.upload_form">
+            <input class="btn input-group" 
+               type="file" 
+               ngf-select 
+               ng-model="admin.detailFile" 
+               name="file" 
+               ngf-pattern="'image/*'"
+               accept="image/*" 
+               ngf-max-size="20MB" 
+               required 
+               />
+               <label class="label label-default url-label"> Site URL:</label>
+            	<input type="text" class="input-group form-control url-inputbox" ng-model="admin.currentDetailSiteUrl" required>
+               <button ng-disabled="!admin.isCode || !admin.currentDetailSiteUrl" class="browse btn btn-primary input-md detail_upload_btn" type="submit" ng-click="admin.submit_detail(0)"> Upload</button>
+            <!-- Image thumbnail: <img style="width:100px;" ngf-thumbnail="admin.file"/> -->
+        </form>
+        <br>
+		<table class="table table-bordered table-hover">
+		  <thead>
+		    <tr>
+		      <th>#</th>
+		      <th>IMAGE URL</th>
+		      <th>SITE URL</th>
+		      <th align="center" style="text-align:center!important">Activation</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-repeat="item in admin.currentDetails">
+		      <td>{{$index+1}}</td>
+		      <td>{{item.imageUrl}}</td>
+		      <td><a href={{item.siteUrl}}>{{item.siteUrl}}</a></td>
+		      <td align="center"><span ng-show="!item.active" style="color:red">Not available</span><span ng-show="item.active" style="color:blue">Available</span></td>
+		      <td align="center"><button ng-click="admin.showModal(item.imageUrl)" class="btn btn-success btn-xs">SHOW</button>&nbsp;<button ng-show="!item.active" class="btn btn-warning btn-xs" ng-click="admin.allow('0',$index)">ALLOW</button><button ng-show="item.active" class="btn btn-danger btn-xs" ng-click="admin.reject('0',$index)">REJECT</button></td>
+		    </tr>
+		  </tbody>
+		</table>
+		<span class="splash_title">SPLASH IMAGES</span>&nbsp;&nbsp;&nbsp;<span>The width should be same with height</span>&nbsp;&nbsp;&nbsp;<button class="btn btn-xs btn-success" ng-click="admin.viewSample(1)">View sample</button>
+		<br>
+		<form class="form-inline"  name="admin.upload_form">
+            <input class="btn input-group" 
+               type="file" 
+               ngf-select 
+               ng-model="admin.splashFile" 
+               name="file" 
+               ngf-pattern="'image/*'"
+               accept="image/*" 
+               ngf-max-size="20MB" 
+               required 
+               />
+               <label class="label label-default url-label"> Site URL:</label>
+            	<input type="text" class="input-group form-control url-inputbox" ng-model="admin.currentSplashSiteUrl" required>
+               <button ng-disabled="!admin.isCode || !admin.currentSplashSiteUrl" class="browse btn btn-primary input-md detail_upload_btn" type="submit" ng-click="admin.submit_detail(1)">Upload</button>
+            <!-- Image thumbnail: <img style="width:100px;" ngf-thumbnail="admin.file"/> -->
+        </form>
+        <br>
+		<table class="table table-bordered table-hover">
+		  <thead>
+		    <tr>
+		      <th>#</th>
+		      <th>IMAGE URL</th>
+		      <th>SITE URL</th>
+		      <th align="center" style="text-align:center!important">Activation</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-repeat="item in admin.currentSplashs">
+		      <td>{{$index+1}}</td>
+		      <td>{{item.imageUrl}}</td>
+		      <td><a>{{item.siteUrl}}</a></td>
+		      <td align="center"><span ng-show="!item.active" style="color:red">Not available</span><span ng-show="item.active" style="color:blue">Available</span></td>
+		      <td align="center"><button ng-click="admin.showModal(item.imageUrl)" class="btn btn-success btn-xs">SHOW</button>&nbsp;<button ng-show="!item.active" class="btn btn-warning btn-xs" ng-click="admin.allow('1',$index)">ALLOW</button><button ng-show="item.active" class="btn btn-danger btn-xs" ng-click="admin.reject('1',$index)">REJECT</button></td>
+		    </tr>
+		  </tbody>
+		</table>
+		<span class="banner_title">BANNER IMAGES</span>&nbsp;&nbsp;&nbsp;<span>The width should be about 7 times of height</span>&nbsp;&nbsp;&nbsp;<button class="btn btn-xs btn-success" ng-click="admin.viewSample(2)">View sample</button>
+		<br>
+		<form  class="form-inline" name="admin.upload_form">
+            <input class="btn input-group" 
+               type="file" 
+               ngf-select 
+               ng-model="admin.bannerFile" 
+               name="file" 
+               ngf-pattern="'image/*'"
+               accept="image/*" 
+               ngf-max-size="20MB" 
+               required 
+               />
+               <label class="label label-default url-label"> Site URL:</label>
+            	<input type="text" class="input-group form-control url-inputbox" ng-model="admin.currentBannerSiteUrl" required>
+               <button ng-disabled="!admin.isCode || !admin.currentBannerSiteUrl" class="browse btn btn-primary input-md detail_upload_btn" type="submit" ng-click="admin.submit_detail(2)"> Upload</button>
+            <!-- Image thumbnail: <img style="width:100px;" ngf-thumbnail="admin.file"/> -->
+        </form>
+        <br>
+        <table class="table table-bordered table-hover">
+		  <thead>
+		    <tr>
+		      <th>#</th>
+		      <th>IMAGE URL</th>
+		      <th>SITE URL</th>
+		      <th align="center" style="text-align:center!important">Activation</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-repeat="item in admin.currentBanners">
+		      <td>{{$index+1}}</td>
+		      <td>{{item.imageUrl}}</td>
+		      <td><a href={{item.siteUrl}}>{{item.siteUrl}}</a></td>
+		      <td align="center"><span ng-show="!item.active" style="color:red">Not available</span><span ng-show="item.active" style="color:blue">Available</span></td>
+		      <td align="center"><button ng-click="admin.showModal(item.imageUrl)" class="btn btn-success btn-xs">SHOW</button>&nbsp;<button ng-show="!item.active" class="btn btn-warning btn-xs" ng-click="admin.allow('2',$index)">ALLOW</button><button ng-show="item.active" class="btn btn-danger btn-xs" ng-click="admin.reject('2',$index)">REJECT</button></td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
+</div>
+<!-- BootstrapJS Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Body -->
+            <div class="modal-body">
+            	<img ng-src={{admin.currentPhotoUrl}}>
+            </div>
+            <div class="modal-footer">
+                <!-- Modal 'Yes' & 'No' Buttons -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="sampleModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Body -->
+            <div class="modal-body">
+            	<img ng-src={{admin.sampleUrl}}>
+            </div>
+            <div class="modal-footer">
+                <!-- Modal 'Yes' & 'No' Buttons -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="userModal" role="dialog">
+    <div class="modal-dialog" style="width:50%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Body -->
+            <div class="modal-body" style="min-height:600px;">
+				    <div class='row'>
+				        <div class='col-xs-12'>
+				            <table class="table table-bordered">
+				            	<tr>
+				            		<td>No</td>
+				            		<td>Email</td>
+				            	</tr>
+				            	<tr ng-repeat = 'item in admin.users'>
+				            		<td>{{$index}}</td>
+				            		<td>{{item.email}}</td>
+				            	</tr>
+				            </table>
+				        </div>
+				    </div>
+			</div>
+            <div class="modal-footer">
+                <!-- Modal 'Yes' & 'No' Buttons -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="treeModal" role="dialog">
+    <div class="modal-dialog" style="width:50%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Body -->
+            <div class="modal-body" style="min-height:400px;">
+            	<h3>Add Directory / Remove Directory / Add Code</h3>
+            	<span ng-repeat = "options in admin.categories track by $index">
+            		<select ng-options="n for n in options" ng-model="admin.selectedItem[$index]" ng-change="admin.setSubCategory($index)">
+            		<option value="">----Select Category----</option>
+            		</select>
+            	</span>
+			    <div class='row'>
+			        <div class='col-xs-12'>
+			            <ol class="breadcrumb">
+						  <li ng-repeat='item in admin.editSelection'><a href="#">{{item}}</a></li>
+						</ol>
+			        </div>
+			    </div>
+			    <div class="row">
+			    	<div class='col-xs-6'>
+				    	<div class="form-group">
+						    <label for="directoryName">Directory Name</label>
+						    <input type="text" class="form-control" id="directoryName" placeholder="Directory Name" ng-model="newCode.directory">
+						</div>
+					</div>
+			    	<div class='col-xs-6'>
+				    	<div class="form-group">
+						    <label for="codeName">Code Name</label>
+						    <input type="text" class="form-control" id="codeName" placeholder="Code" ng-model="newCode.code">
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group">
+						    <label for="description">Code Description</label>
+						    <textarea class="form-control" rows="5" id="description" placeholder="Description Text" ng-model="newCode.description"></textarea>
+						</div>
+					</div>
+			    </div>
+			    <div class="alert alert-success" role="alert" ng-if="added">New code is added successfully</div>
+			    <div class="alert alert-success" role="alert" ng-if="deleted">Directory is deleted successfully</div>
+			</div>
+            <div class="modal-footer">
+                <!-- Modal 'Yes' & 'No' Buttons -->
+                <button type="button" class="btn btn-primary" ng-click="admin.addNew()">Add</button>
+                <button type="button" class="btn btn-primary" ng-disabled="!admin.deleteDir" ng-click="admin.deleteDirectory()">Delete</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+</script>
