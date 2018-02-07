@@ -456,9 +456,9 @@ module.exports = function (router) {
 					return;
 				}
 				console.log("saved");
-				var domain_url = 'oandptree.com';
-				var api_key = 'key-868c4265714f241cf3f42520038c59e0';
-				var from_who = "admin@oandptree.com";
+				var domain_url = '';
+				var api_key = '';
+				var from_who = "";
 				var mailgun = new Mailgun({ apiKey: api_key, domain: domain_url });
 				var data = {
 					from: from_who,
@@ -796,9 +796,9 @@ module.exports = function (router) {
 						res.json({ success: false, message: "Try again later." });
 						return;
 					}
-					var domain_url = 'oandptree.com';
-					var api_key = 'key-868c4265714f241cf3f42520038c59e0';
-					var from_who = "admin@oandptree.com";
+					var domain_url = '';
+					var api_key = '';
+					var from_who = "";
 					var mailgun = new Mailgun({ apiKey: api_key, domain: domain_url });
 					var data = {
 						from: from_who,
